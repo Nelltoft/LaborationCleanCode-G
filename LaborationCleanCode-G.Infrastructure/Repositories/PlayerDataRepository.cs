@@ -23,7 +23,6 @@ public class PlayerDataRepository : IPlayerDataRepository
     {
         StreamReader response = new StreamReader("highscore.txt");
         List<PlayerData> playerList = new();
-
         string line;
         while ((line = response.ReadLine()!) != null)
         {
