@@ -14,17 +14,18 @@ public class PlayerDataRepository : IPlayerDataRepository
 
     public void AddPlayer(IPlayerData playerData)
     {
-        StreamWriter output = new StreamWriter("highscore.txt", append: true);
+        StreamWriter output = new("highscore.txt", append: true);
         output.WriteLine($"{playerData.Name}#&#{playerData.TotalGuesses}");
         output.Close();
     }
 
     public void GetAllPlayers()
     {
-        StreamReader response = new StreamReader("highscore.txt");
+        StreamReader response = new("highscore.txt");
         List<PlayerData> playerList = new();
         string line;
-        while ((line = response.ReadLine()!) != null)
+
+        while ((line = response.ReadLine()!) is not null)
         {
             string[] playerNameAndGuesses = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
             string name = playerNameAndGuesses[0];
@@ -41,27 +42,13 @@ public class PlayerDataRepository : IPlayerDataRepository
             }
         }
 
-        playerList.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
-
         _iO.Output($"{"Player",-9}{"Games",5:D}{"Average",9:F2}");
         _iO.Output("------------------------");
-        foreach (var player in playerList)
+
+        foreach (var player in playerList.OrderBy(p => p.Average()))
         {
             _iO.Output($"{player.Name,-9}{player.NumberOfGames,5:D}{player.Average(),9:F2}\n");
         }
         response.Close();
-
-        /*var playerList = response.ReadLine()
-        .Select(line => line.Split(new[] { "#&#" }, StringSplitOptions.None))
-        .Select(data => new PlayerData(data[0], Convert.ToInt32(data[1])))
-        .GroupBy(player => player.Name)
-        .Select(group =>
-        {
-            var playerData = group.First();
-            playerData.Update(group.Sum(p => p.Guesses));
-            return playerData;
-        })
-        .OrderBy(player => player.Average())
-        .ToList();*/
     }
 }

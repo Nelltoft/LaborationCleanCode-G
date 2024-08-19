@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LaborationCleanCode-G.Core\LaborationCleanCode-G.Core.csproj" />
+    <ProjectReference Include="..\LaborationCleanCode-G.Infrastructure\LaborationCleanCode-G.Infrastructure.csproj" />
+    <ProjectReference Include="..\LaborationCleanCode-G\LaborationCleanCode-G.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
