@@ -5,5 +5,5 @@ namespace LaborationCleanCode_G.Core.Interfaces;
 public interface IPlayerDataRepository
 {
     void AddPlayer(IPlayerData playerData);
-    void GetAllPlayers();
+    ICollection<PlayerData> GetAllPlayers();
 }

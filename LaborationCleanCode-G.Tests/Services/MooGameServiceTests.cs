@@ -17,7 +17,7 @@ public class MooGameServiceTests
     public void Initialize()
     {
         _inputOutput = new ConsoleIO();
-        _playerDataRepository = new PlayerDataRepository(_inputOutput);
+        _playerDataRepository = new PlayerDataRepository();
         _sut = new MooGameService(_inputOutput, _playerDataRepository);
     }
 

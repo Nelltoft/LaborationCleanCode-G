@@ -10,7 +10,7 @@ class Program
     static void Main()
     {
         IInputOutput _iO = new ConsoleIO();
-        IPlayerDataRepository _playerDataRepository = new PlayerDataRepository(_iO);
+        IPlayerDataRepository _playerDataRepository = new PlayerDataRepository();
         IGameService _gameService = new MooGameService(_iO, _playerDataRepository);
         IGameController _gameController = new MooGameController(_gameService, _iO);
         _gameController.RunGame();

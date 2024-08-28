@@ -43,7 +43,8 @@ public class MooGameService : IGameService
 
         IPlayerData player = new PlayerData(playerName, numberOfGuesses);
         _playerDataRepository.AddPlayer(player);
-        _playerDataRepository.GetAllPlayers();
+        ShowHighScore();
+
 
         if (numberOfGuesses > 1)
         {
@@ -100,5 +101,18 @@ public class MooGameService : IGameService
             }
         }
         return bullsAndCows.ToString();
+    }
+
+    void ShowHighScore()
+    {
+        var highScoreList  = _playerDataRepository.GetAllPlayers();
+
+        _iO.Output($"{"Player",-9}{"Games",-9}{"Average",-9}");
+        _iO.Output("------------------------");
+
+        foreach (var player in highScoreList)
+        {
+            _iO.Output($"{player.Name,-9}{player.NumberOfGames,-9}{player.Average(),-9}\n");
+        }
     }
 }

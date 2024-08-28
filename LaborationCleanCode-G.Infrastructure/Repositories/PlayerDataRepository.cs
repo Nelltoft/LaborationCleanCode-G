@@ -5,12 +5,6 @@ namespace LaborationCleanCode_G.Infrastructure.Repositories;
 
 public class PlayerDataRepository : IPlayerDataRepository
 {
-    private readonly IInputOutput _iO;
-
-    public PlayerDataRepository(IInputOutput iO)
-    {
-        _iO = iO;
-    }
 
     public void AddPlayer(IPlayerData playerData)
     {
@@ -19,7 +13,7 @@ public class PlayerDataRepository : IPlayerDataRepository
         output.Close();
     }
 
-    public void GetAllPlayers()
+    public ICollection<PlayerData> GetAllPlayers()
     {
         StreamReader response = new("highscore.txt");
         List<PlayerData> playerList = new();
@@ -41,14 +35,8 @@ public class PlayerDataRepository : IPlayerDataRepository
                 playerList[index].Update(guesses);
             }
         }
-
-        _iO.Output($"{"Player",-9}{"Games",-9}{"Average",-9}");
-        _iO.Output("------------------------");
-
-        foreach (var player in playerList.OrderBy(p => p.Average()))
-        {
-            _iO.Output($"{player.Name,-9}{player.NumberOfGames,-9}{player.Average(),-9}\n");
-        }
         response.Close();
+
+        return playerList.OrderBy(p => p.Average()).ToList();
     }
 }
