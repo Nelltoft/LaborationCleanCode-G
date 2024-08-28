@@ -42,12 +42,12 @@ public class PlayerDataRepository : IPlayerDataRepository
             }
         }
 
-        _iO.Output($"{"Player",-9}{"Games",5:D}{"Average",9:F2}");
+        _iO.Output($"{"Player",-9}{"Games",-9}{"Average",-9}");
         _iO.Output("------------------------");
 
         foreach (var player in playerList.OrderBy(p => p.Average()))
         {
-            _iO.Output($"{player.Name,-9}{player.NumberOfGames,5:D}{player.Average(),9:F2}\n");
+            _iO.Output($"{player.Name,-9}{player.NumberOfGames,-9}{player.Average(),-9}\n");
         }
         response.Close();
     }

@@ -1,4 +1,6 @@
-﻿using LaborationCleanCode_G.Core.Interfaces;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LaborationCleanCode_G.Core.Services;
+using LaborationCleanCode_G.Core.Interfaces;
 using LaborationCleanCode_G.Infrastructure.Repositories;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 
@@ -55,5 +57,34 @@ public class MooGameServiceTests
 
         //assert
         Assert.AreEqual(result.Distinct().Count(), shouldEquals);
+    }
+
+    [TestMethod()]
+    public void CheckWinCondition_TestThatItReturnsAString()
+    {
+        //assign
+        var playerGuess = "1234";
+        var gameGoal = "1234";
+
+        //act
+        var result = _sut.CheckWinCondition(gameGoal, playerGuess);
+
+        //assert
+        Assert.IsInstanceOfType<string>(result);
+    }
+
+    [TestMethod()]
+    public void CheckWinCondition_TestThatItReturnsTheStringBBBBIfThePlayerWins()
+    {
+        //assign
+        var playerGuess = "1234";
+        var gameGoal = "1234";
+        var shouldEqual = "BBBB,";
+
+        //act
+        var result = _sut.CheckWinCondition(gameGoal, playerGuess);
+
+        //assert
+        Assert.AreEqual(shouldEqual, result);
     }
 }
