@@ -12,25 +12,30 @@ namespace LaborationCleanCode_G.Infrastructure.Repositories.Tests
         public void Initialize() 
         {
             _sut = new MockPlayerDataRepository();
+
+            var player = new PlayerData("Björn", 3);
+            _sut.AddPlayer(player);
+        }
+
+        [TestCleanup]
+        public void Cleanup() 
+        {
+            // The code below empties the mockhighscore text file to save space.
+            StreamWriter reset = new("mockhighscore.txt", false);
+            reset.Write(string.Empty);
+            reset.Close();           
         }
 
         [TestMethod()]
         public void GetAllPlayers_TestThatItReturnsAListOfPlayerData()
         {
             //assign
-            var player = new PlayerData("Björn", 3);
-            _sut.AddPlayer(player);
 
             //act
             var result = _sut.GetAllPlayers();
 
             //assert
             Assert.IsInstanceOfType<List<PlayerData>>(result);
-
-            // The code below empties the mockhighscore text file to save space.
-            StreamWriter reset = new("mockhighscore.txt", false);
-            reset.Write(string.Empty);
-            reset.Close();
         }
     }
 }
