@@ -8,9 +8,9 @@ public class PlayerDataRepository : IPlayerDataRepository
 
     public void AddPlayer(IPlayerData playerData)
     {
-        StreamWriter output = new("highscore.txt", append: true);
-        output.WriteLine($"{playerData.Name}#&#{playerData.TotalGuesses}");
-        output.Close();
+        StreamWriter request = new("highscore.txt", append: true);
+        request.WriteLine($"{playerData.Name}#&#{playerData.TotalGuesses}");
+        request.Close();
     }
 
     public ICollection<PlayerData> GetAllPlayers()

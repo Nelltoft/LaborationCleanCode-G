@@ -26,6 +26,11 @@ namespace LaborationCleanCode_G.Infrastructure.Repositories.Tests
 
             //assert
             Assert.IsInstanceOfType<List<PlayerData>>(result);
+
+            // The code below empties the mockhighscore text file to save space.
+            StreamWriter reset = new("mockhighscore.txt", false);
+            reset.Write(string.Empty);
+            reset.Close();
         }
     }
 }

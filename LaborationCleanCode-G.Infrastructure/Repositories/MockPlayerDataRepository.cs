@@ -7,9 +7,9 @@ public class MockPlayerDataRepository : IPlayerDataRepository
 {
     public void AddPlayer(IPlayerData playerData)
     {
-        StreamWriter output = new("mockhighscore.txt", append: true);
-        output.WriteLine($"{playerData.Name}#&#{playerData.TotalGuesses}");
-        output.Close();
+        StreamWriter request = new("mockhighscore.txt", append: true);
+        request.WriteLine($"{playerData.Name}#&#{playerData.TotalGuesses}");
+        request.Close();
     }
 
     public ICollection<PlayerData> GetAllPlayers()
