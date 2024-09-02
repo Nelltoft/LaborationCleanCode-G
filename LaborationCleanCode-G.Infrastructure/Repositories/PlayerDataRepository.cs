@@ -18,6 +18,7 @@ public class PlayerDataRepository : IPlayerDataRepository
         StreamReader response = new("highscore.txt");
         List<PlayerData> playerList = new();
         string line;
+        int playerListStartingIndex = 0;
 
         while ((line = response.ReadLine()!) is not null)
         {
@@ -26,7 +27,7 @@ public class PlayerDataRepository : IPlayerDataRepository
             int guesses = Convert.ToInt32(playerNameAndGuesses[1]);
             PlayerData player = new(name, guesses);
             int index = playerList.IndexOf(player);
-            if (index < 0)
+            if (index < playerListStartingIndex)
             {
                 playerList.Add(player);
             }
