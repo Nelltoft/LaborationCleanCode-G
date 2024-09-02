@@ -73,6 +73,12 @@ public class MooGameService : IGameService
         return goal;
     }
 
+    /// <summary>
+    /// Compares the players guess to the goal of the game
+    /// </summary>
+    /// <param name="goal"></param>
+    /// <param name="guess"></param>
+    /// <returns>String of BBBB, if the players guess is the same as the goal of the game</returns>
     public string CheckWinCondition(string goal, string guess)
     {
         StringBuilder bullsAndCows = new();
